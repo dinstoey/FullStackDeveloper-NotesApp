@@ -155,6 +155,7 @@ exports.searchNotes = async (req, res) => {
   }
 };
 
+// function which selects id, title, and text only from a note for viewing purposes
 function display_note(note) {
   return {
     id: note._id,
