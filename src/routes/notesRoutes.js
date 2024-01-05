@@ -7,22 +7,22 @@ const noteController = require("../controllers/noteController");
 router.use(authenticationMiddleware);
 
 // Route to get all notes
-router.get("/", noteController.getAllNotes);
+router.get("/notes/", noteController.getAllNotes);
 
 // Route to get a specific note by ID
-router.get("/:id", noteController.getNoteById);
+router.get("/notes/:id", noteController.getNoteById);
 
 // Route to create a new note
-router.post("/", noteController.createNote);
+router.post("/notes/", noteController.createNote);
 
 // Route to update a note by ID
-router.put("/:id", noteController.editNote);
+router.put("/notes/:id", noteController.editNote);
 
 // Route to delete a note by ID
-router.delete("/:id", noteController.deleteNote);
+router.delete("/notes/:id", noteController.deleteNote);
 
 // Route to share a note with another user
-router.post("/:id/share", noteController.shareNote);
+router.post("/notes/:id/share", noteController.shareNote);
 
 // Route for searching notes based on a query
 router.get("/search", noteController.searchNotes);

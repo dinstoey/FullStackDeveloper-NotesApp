@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 
 // Protected route - require token for access
 const authenticationMiddleware = (req, res, next) => {
-  console.log("Authentication Middleware Called");
   const token = req.headers.authorization;
 
   if (!token) {

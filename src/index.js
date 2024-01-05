@@ -31,12 +31,10 @@ mongoose.connect(
 app.use(rateLimitMiddleware);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(authenticationMiddleware);
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/notes", notesRoutes);
-app.use("/api/search", notesRoutes);
+app.use("/api", authenticationMiddleware, notesRoutes);
 
 // Start the server
 const server = app.listen(port, () => {
