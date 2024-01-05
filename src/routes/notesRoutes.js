@@ -3,22 +3,22 @@ const router = express.Router();
 const authenticationMiddleware = require("../middlewares/authenticationMiddleware");
 const noteController = require("../controllers/noteController");
 
-// Middleware to ensure authentication for all note routes
+// Middleware to ensure users are authenticated
 router.use(authenticationMiddleware);
 
 // Route to get all notes
 router.get("/notes/", noteController.getAllNotes);
 
-// Route to get a specific note by ID
+// Route to get a specific note with ID
 router.get("/notes/:id", noteController.getNoteById);
 
 // Route to create a new note
 router.post("/notes/", noteController.createNote);
 
-// Route to update a note by ID
+// Route to update a note with ID
 router.put("/notes/:id", noteController.editNote);
 
-// Route to delete a note by ID
+// Route to delete a note with ID
 router.delete("/notes/:id", noteController.deleteNote);
 
 // Route to share a note with another user

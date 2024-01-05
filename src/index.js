@@ -10,15 +10,16 @@ const authenticationMiddleware = require("./middlewares/authenticationMiddleware
 const app = express();
 const port = 3000;
 
-// Rate limiting middleware
+// Rate limiting middleware to 5 requests per minute
+// By limiting requests it prevents resource abuse or Dos Attack
 const rateLimitMiddleware = rateLimit({
   windowMs: 60 * 1000,
-  max: 1000,
-  message: "You have exceeded your 2 requests per minute limit.",
+  max: 5,
+  message: "You have exceeded your 5 requests per minute limit.",
   headers: true,
 });
 
-// Connect to MongoDB
+// Connect to MongoDB with the initialized username and password
 mongoose.connect(
   "mongodb://uname:pass@localhost:27017/notesdb?authSource=admin",
   {
@@ -32,8 +33,9 @@ app.use(rateLimitMiddleware);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Routes
+// Routes to authentication endpoints
 app.use("/api/auth", authRoutes);
+// Routes to notes endpoints, going through the middleware used to protect the routes
 app.use("/api", authenticationMiddleware, notesRoutes);
 
 // Start the server

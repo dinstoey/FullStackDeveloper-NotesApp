@@ -22,7 +22,7 @@ exports.getNoteById = async (req, res) => {
     const note = await Note.findOne({
       $and: [{ shared_with: user_id }, { _id: note_id }],
     });
-
+    // Not not found
     if (!note) {
       res.status(404).json({
         error: "Not found",
@@ -58,11 +58,11 @@ exports.editNote = async (req, res) => {
   try {
     const user_id = req.userId;
     const note_id = new mongoose.Types.ObjectId(req.params.id);
-
+    // fast searching with Mongoose's -in text indexing for
     const note = await Note.findOne({
       $and: [{ owner: user_id }, { _id: note_id }],
     });
-
+    // not not found
     if (!note) {
       res.status(404).json({
         error: "Not found",
@@ -145,6 +145,7 @@ exports.searchNotes = async (req, res) => {
     const user_id = req.userId;
     const query = req.query.q;
     console.log("Search query:", query);
+    // querying the text index for a fast search
     const notes = await Note.find({
       $and: [{ shared_with: user_id }, { $text: { $search: query } }],
     });
