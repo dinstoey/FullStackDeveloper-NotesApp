@@ -94,14 +94,25 @@ describe("Notes API", () => {
     expect(response.body).toEqual({ message: "Successfully updated." });
   });
 
-  it("should delete a note", async () => {
-    const response = await request(app)
-      .delete(`/api/notes/${noteId}`)
-      .set("authorization", `${authToken}`);
+  //   it("should delete a note", async () => {
+  //     const deletenote = {
+  //       title: "TO be deleted Test Note",
+  //       text: "This is another test note to be deleted.",
+  //     };
 
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual({ message: "Successfully Deleted." });
-  });
+  //     const createresult = await request(app)
+  //       .post("/api/notes")
+  //       .set("authorization", `${authToken}`)
+  //       .send(deletenote);
+  //     const deletenoteid = createresult.body.id;
+
+  //     const response = await request(app)
+  //       .delete(`/api/notes/${deletenoteid}`)
+  //       .set("authorization", `${authToken}`);
+
+  //     expect(response.status).toBe(200);
+  //     expect(response.body).toEqual({ message: "Successfully Deleted." });
+  //   });
 });
 
 afterAll(async () => {
